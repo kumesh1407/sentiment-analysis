@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SR</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+   <div class="container-fluid">
+  <header>
+    <h1 style="text-align:center">Sementic Text Analysis</h1>
+  </header>
+  <div class="row">
+  <div class="col-md-6">
+      <div class="form-group">
+           <label for="comment">Enter Your Text Please:</label>
+           <textarea class="form-control" rows="5" id="textValue"></textarea>
+      </div>
+  </div>
+  <div class="col-md-6">
+    <div id="imageContainer" style="margin-left:50px">
+        <img class="logo" id="picture" src="/images/start.jpg" width="200" height="200" alt="My_Logo">
+    </div>
+  </div>
+   </div>
+
+   <div class="row">
+       <div class="col-md-6">
+          <button type="button" id="submitBtn" class="btn btn-success">Check Your Result</button>
+      </div>
+  </div>
+   
+  <script type="text/javascript">
+    // API Call to Analys the text
+  
+    $(document).ready(function(){
+
+        $("#submitBtn").click(function(){
+            var val = $.trim($("#textValue").val());
+            if(val != ""){
+
+                console.log(val);
+               $('#textValue').val('');
+               var API='http://localhost:4000/result/'+val;
+                console.log(API)
+                  $.ajax({
+                      type:'GET',
+                      url:API,
+                      success: function(data){
+                        console.log(data);
+                            $("#picture").attr("src", data);
+                            }
+                        });  // end of the ajax request.. {% endcomment %}
+                    }
+            });
+    });
+  </script>
+</body>
+</html>
